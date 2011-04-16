@@ -2,8 +2,8 @@ module LoopUnrolling.Pass (peelUnrollLoopsProgram) where
 
 import GHCPlugins
 
-import LoopUnrolling.Plugin.Annotations
-import LoopUnrolling.Plugin.Utilities
+import LoopUnrolling.Annotations
+import LoopUnrolling.Utilities
 
 import Control.Applicative
 import Control.Monad

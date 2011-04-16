@@ -6,8 +6,10 @@ import Data.Data
 import Data.Maybe
 
 
-annotationsOn :: Data a => CoreBndr -> CoreM [a]
-annotationsOn b = findAnnotations deserializeWithData (NamedTarget $ varName b)
+annotationsOn :: Data a => ModGuts -> CoreBndr -> CoreM [a]
+annotationsOn guts bndr = do
+  anns <- getAnnotations deserializeWithData guts
+  return $ lookupWithDefaultUFM anns [] (varUnique bndr)
 
 orElse :: Maybe a -> a -> a
 orElse = flip fromMaybe
