@@ -12,15 +12,15 @@ import Data.Maybe
 import Data.List
 
 
-peelUnrollLoopsProgram :: [CoreBind] -> CoreM [CoreBind]
-peelUnrollLoopsProgram = mapM peelUnrollBind
+peelUnrollLoopsProgram :: ModGuts -> CoreM [CoreBind]
+peelUnrollLoopsProgram mg = mapM (peelUnrollBind mg) $ mg_binds mg
 
-peelUnrollBind :: CoreBind -> CoreM CoreBind
-peelUnrollBind (NonRec b e) = return $ NonRec b e
-peelUnrollBind (Rec bes) = do
+peelUnrollBind :: ModGuts -> CoreBind -> CoreM CoreBind
+peelUnrollBind mg (NonRec b e) = return $ NonRec b e
+peelUnrollBind mg (Rec bes) = do
     let bs = map fst bes
-    peel_amnt   <- forM bs $ \b -> annotationsOn b >>= (return . flattenPeelAnns)
-    unroll_amnt <- forM bs $ \b -> annotationsOn b >>= (return . flattenUnrollAnns)
+    peel_amnt   <- forM bs $ \b -> peelAnns mg b   >>= (return . flattenPeelAnns)
+    unroll_amnt <- forM bs $ \b -> unrollAnns mg b >>= (return . flattenUnrollAnns)
     
     let -- When PEELing, tie the first replication back to itself so the others can get inlined
         tieback_peel bs = fromJust $ head bs

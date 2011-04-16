@@ -5,6 +5,13 @@ import GHCPlugins
 import Data.Data
 import Data.Maybe
 
+import LoopUnrolling.Annotations
+
+peelAnns :: ModGuts -> CoreBndr -> CoreM [Peel]
+peelAnns = annotationsOn 
+
+unrollAnns :: ModGuts -> CoreBndr -> CoreM [Unroll]
+unrollAnns = annotationsOn
 
 annotationsOn :: Data a => ModGuts -> CoreBndr -> CoreM [a]
 annotationsOn guts bndr = do
