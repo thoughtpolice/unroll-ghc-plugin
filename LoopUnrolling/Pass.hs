@@ -105,7 +105,7 @@ replicateBindGroup replicate_amnt orig_bes tieback_strategy = do
             -- the body look small by adding an __inline_me.
             -- The intention is not only to optimize, but to to prevent the compiler from messing
             -- with it (please see http://hackage.haskell.org/trac/ghc/wiki/Inlining for more).
-            extra_binds = this_iter_bs `zip` map mkInlineMe this_iter_es
+            extra_binds = this_iter_bs `zip` this_iter_es
             
             -- If we produced a new binding for an e this iteration, we want to use it instead of the copy
             -- of the expression from the last invocation of go.  Otherwise, use the last generated one.
@@ -116,7 +116,7 @@ replicateBindGroup replicate_amnt orig_bes tieback_strategy = do
     return $ (first_iter_binds, go rest_all_bs_by_iter first_iter_bs)
 
 buildOneIteration :: [CoreExpr] -> [(CoreBndr, CoreBndr)] -> [CoreExpr]
-buildOneIteration es_to_peel subst_bs = map (substExpr subst) es_to_peel
+buildOneIteration es_to_peel subst_bs = map (substExpr (text "LoopUnrolling:buildOneIteration") subst) es_to_peel
   where
     -- Make a substitution mapping from the origin bs to the ones from our last iteration,
     -- then apply that to the original RHS to get a peeled version
