@@ -1,4 +1,4 @@
-module LoopUnrolling.Plugin.Pass (peelUnrollLoopsProgram) where
+module LoopUnrolling.Pass (peelUnrollLoopsProgram) where
 
 import GHCPlugins
 

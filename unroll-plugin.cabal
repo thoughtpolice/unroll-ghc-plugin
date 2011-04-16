@@ -12,13 +12,13 @@ Homepage:       http://github.com/batterseapower/unroll-plugin
 Library
     Exposed-Modules:
         LoopUnrolling.Plugin
+        LoopUnrolling.Annotations
     Other-Modules:
-        LoopUnrolling.Plugin.Pass,
-        LoopUnrolling.Plugin.Utilities
+        LoopUnrolling.Pass,
+        LoopUnrolling.Utilities
     Build-Depends:
         base >= 4,
         syb,
         template-haskell,
         ghc-prim,
-        ghc >= 6.11,
-        unroll-plugin-library
+        ghc >= 7.1

@@ -1,4 +1,4 @@
-module LoopUnrolling.Plugin.Utilities where
+module LoopUnrolling.Utilities where
 
 import GHCPlugins
 

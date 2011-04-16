@@ -1,6 +1,6 @@
 module LoopUnrolling.Plugin where
 
-import LoopUnrolling.Plugin.Pass
+import LoopUnrolling.Pass
 
 import GHCPlugins
 
