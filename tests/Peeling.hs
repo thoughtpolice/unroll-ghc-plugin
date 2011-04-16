@@ -1,6 +1,6 @@
 module Main where
 
-import LoopUnrolling.Plugin.Annotations
+import LoopUnrolling.Annotations
 
 main = do
     -- This application of 10 to accumulator_odd should be optimized by GHC into an application of 8

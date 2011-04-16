@@ -1,6 +1,6 @@
 module Main where
 
-import LoopUnrolling.Plugin.Annotations
+import LoopUnrolling.Annotations
 
 main = do
     print $ accumulator_odd 10
