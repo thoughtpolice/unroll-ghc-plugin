@@ -1,4 +1,4 @@
-Name:           unroll-plugin
+Name:           unroll-ghc-plugin
 Version:        1.0
 License:        BSD3
 License-File:   LICENSE
