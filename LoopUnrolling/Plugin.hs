@@ -1,15 +1,13 @@
 module LoopUnrolling.Plugin where
-
-import LoopUnrolling.Pass
-
-import GHCPlugins
+import LoopUnrolling.Pass (peelUnrollLoopsProgram)
+import GhcPlugins
 
 plugin :: Plugin
 plugin = defaultPlugin {
     installCoreToDos = install
   }
 
+-- Must simplify before hand to get accurate correct recursive loops
 install :: [CommandLineOption] -> [CoreToDo] -> CoreM [CoreToDo]
-install _option todos = do
-    -- Must simplify before hand to get accurate correct recursive loops
-    return $ defaultGentleSimplToDo : CoreDoPluginPass "Peel and unroll loops" (ModGutsToBindsPluginPass peelUnrollLoopsProgram) : todos
+install _ todos = return $ defaultGentleSimplToDo : unroll : todos
+  where unroll = CoreDoPluginPass "Peel/unroll loops" peelUnrollLoopsProgram

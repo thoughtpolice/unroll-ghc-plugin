@@ -1,13 +1,19 @@
 Name:           unroll-ghc-plugin
-Version:        1.0
+Version:        0.1
 License:        BSD3
 License-File:   LICENSE
 Synopsis:       A plugin for GHC that performs loop unrolling according to user annotations.
-Cabal-Version:  >= 1.2
+Description:    This library implements a GHC compiler plugin that unrolls loops in functions according to user level annotations.
+Cabal-Version:  >= 1.10
 Build-Type:     Simple
 Author:         Max Bolingbroke <batterseapower@hotmail.com>
-Maintainer:     Max Bolingbroke <batterseapower@hotmail.com>
-Homepage:       http://github.com/batterseapower/unroll-plugin
+Maintainer:     Austin Seipp <as@hacks.yi.org>
+Homepage:       http://github.com/thoughtpolice/unroll-ghc-plugin
+Bug-reports:    https://github.com/thoughtpolice/unroll-ghc-plugin/issues
+
+source-repository head
+  type: git
+  location: https://github.com/thoughtpolice/unroll-ghc-plugin.git
 
 Library
     Exposed-Modules:
@@ -21,4 +27,5 @@ Library
         syb,
         template-haskell,
         ghc-prim,
-        ghc >= 7.1
+        ghc >= 7.2
+    default-language: Haskell98

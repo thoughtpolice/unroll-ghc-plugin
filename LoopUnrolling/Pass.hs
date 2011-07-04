@@ -1,6 +1,6 @@
 module LoopUnrolling.Pass (peelUnrollLoopsProgram) where
 
-import GHCPlugins
+import GhcPlugins
 
 import LoopUnrolling.Annotations
 import LoopUnrolling.Utilities
@@ -12,8 +12,10 @@ import Data.Maybe
 import Data.List
 
 
-peelUnrollLoopsProgram :: ModGuts -> CoreM [CoreBind]
-peelUnrollLoopsProgram mg = mapM (peelUnrollBind mg) $ mg_binds mg
+peelUnrollLoopsProgram :: ModGuts -> CoreM ModGuts
+peelUnrollLoopsProgram guts = do
+  newBinds <- mapM (peelUnrollBind guts) $ mg_binds guts
+  return $ guts { mg_binds = newBinds }
 
 peelUnrollBind :: ModGuts -> CoreBind -> CoreM CoreBind
 peelUnrollBind mg (NonRec b e) = return $ NonRec b e

@@ -1,11 +1,9 @@
 module LoopUnrolling.Utilities where
-
-import GHCPlugins
+import LoopUnrolling.Annotations
+import GhcPlugins
 
 import Data.Data
 import Data.Maybe
-
-import LoopUnrolling.Annotations
 
 peelAnns :: ModGuts -> CoreBndr -> CoreM [Peel]
 peelAnns = annotationsOn 
