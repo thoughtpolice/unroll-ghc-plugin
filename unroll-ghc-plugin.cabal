@@ -23,8 +23,8 @@ Library
         LoopUnrolling.Pass,
         LoopUnrolling.Utilities
     Build-Depends:
-        base >= 4,
-        syb,
+        base == 4.4.*,
+        syb == 0.3.3,
         template-haskell,
         ghc-prim,
         ghc >= 7.2

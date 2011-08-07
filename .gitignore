@@ -13,3 +13,5 @@ tests/Unrolling
 tests/Unrolling.core
 tests/Peeling
 tests/Peeling.core
+dist
+*~
