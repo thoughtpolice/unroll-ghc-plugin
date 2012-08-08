@@ -1,5 +1,5 @@
 name:                unroll-ghc-plugin
-version:             0.0
+version:             0.1
 synopsis:            Compiler plugin for loop unrolling
 description:
   This plugin gives an example of defining a compiler plugin for
@@ -34,8 +34,8 @@ library
     LoopUnrolling.Pass
     LoopUnrolling.Utilities
   build-depends:
-    base         >= 4,
-    ghc          >= 7.4
+    base < 5,
+    ghc >= 7.4
 
   ghc-options:        -Wall -O2 -funbox-strict-fields
                       -fwarn-tabs
