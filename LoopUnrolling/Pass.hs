@@ -5,7 +5,6 @@ import GhcPlugins
 import LoopUnrolling.Annotations
 import LoopUnrolling.Utilities
 
-import Control.Applicative
 import Control.Monad
 
 import Data.Maybe
@@ -18,16 +17,16 @@ peelUnrollLoopsProgram guts = do
   return $ guts { mg_binds = newBinds }
 
 peelUnrollBind :: ModGuts -> CoreBind -> CoreM CoreBind
-peelUnrollBind mg (NonRec b e) = return $ NonRec b e
+peelUnrollBind _  (NonRec b e) = return $ NonRec b e
 peelUnrollBind mg (Rec bes) = do
     let bs = map fst bes
     peel_amnt   <- forM bs $ \b -> peelAnns mg b   >>= (return . flattenPeelAnns)
     unroll_amnt <- forM bs $ \b -> unrollAnns mg b >>= (return . flattenUnrollAnns)
     
     let -- When PEELing, tie the first replication back to itself so the others can get inlined
-        tieback_peel bs = fromJust $ head bs
+        tieback_peel bs' = fromJust $ head bs'
         -- When UNROLLing, tie the first replication back to the last so we can inline everything into the first
-        tieback_unroll bs = last [b | Just b <- bs]
+        tieback_unroll bs' = last [b | Just b <- bs']
     
     (bes', peeled_bes)    <- replicateBindGroup peel_amnt   bes  tieback_peel
     (bes'', unrolled_bes) <- replicateBindGroup unroll_amnt bes' tieback_unroll 
@@ -97,7 +96,7 @@ replicateBindGroup replicate_amnt orig_bes tieback_strategy = do
          --     we need at least one non-INLINEd thing in the group of unrolled definitions.
     
         -- We use this loop to actually do the business of replicating everything the remaining number of times:
-        go []                               last_iter_bs = []
+        go []                               _            = []
         go (mb_this_iter_bs : rest_iter_bs) last_iter_bs = extra_binds ++ rest_binds
           -- OK, replicate any expressions that still have more replications to go
           where

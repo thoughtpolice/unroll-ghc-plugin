@@ -1,4 +1,7 @@
-module LoopUnrolling.Plugin where
+module LoopUnrolling.Plugin
+       ( plugin -- :: Plugin
+       ) where
+
 import LoopUnrolling.Pass (peelUnrollLoopsProgram)
 import GhcPlugins
 
