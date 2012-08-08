@@ -3,15 +3,14 @@ version:             0.1
 synopsis:            Compiler plugin for loop unrolling
 description:
   This plugin gives an example of defining a compiler plugin for
-  GHC. You mark functions with the `Strictify` annotation and GHC
-  makes the function strict (by recursively expanding non-recursive
-  let bindings into case bindings.)
+  GHC. It unrolls/peels loops loops that are properly annoted. See the
+  included tests for examples.
 homepage:            http://thoughtpolice.github.com/unroll-ghc-plugin
 bug-reports:         http://github.com/thoughtpolice/unroll-ghc-plugin/issues
 license:             BSD3
 license-file:        LICENSE.txt
 copyright:           Copyright (c) the GHC authors
-author:              The GHC authors
+author:              Max Bolingbroke
 maintainer:          Austin Seipp <mad.one@gmail.com>
 category:            Compiler Plugin
 build-type:          Simple
