@@ -113,7 +113,7 @@ replicateBindGroup replicate_amnt orig_bes tieback_strategy = do
             rest_binds = go rest_iter_bs $ zipWith (flip fromMaybe) mb_this_iter_bs last_iter_bs
     
     -- Done! Put together the two sets of bindings
-    putMsgS (showSDocDebug $ ppr all_bs_by_iter)
+    --putMsgS (showSDocDebug $ ppr all_bs_by_iter)
     return $ (first_iter_binds, go rest_all_bs_by_iter first_iter_bs)
 
 buildOneIteration :: [CoreExpr] -> [(CoreBndr, CoreBndr)] -> [CoreExpr]
